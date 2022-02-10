@@ -36,7 +36,7 @@
                                     <div class="row">
                                         <div class="col-8 text-center col-lg-6 fs-5 offset-2 fw-light offset-lg-3 my-2">
                                             <div class="row">
-                                                <div class="col-4 navlinksdiv"><a class="navlinks text-decoration-none " href="home.php">Home</a></div>
+                                            <div class="col-4 navlinksdiv"><a class="navlinks text-decoration-none " href="home.php">Home</a></div>
                                                 <div class="col-4 navlinksdiv"><a class="navlinks text-decoration-none" href="sampleselling.php">Samples</a></div>
                                                 <div class="col-4 navlinksdiv"><a class="navlinks text-decoration-none" href="#">Contact</a></div>
                                             </div>
@@ -203,7 +203,7 @@
 
         </div>
     </div>
-    <script src="s3.js"></script>
+    <script src="sampleselling.js"></script>
 </body>
 
 </html>

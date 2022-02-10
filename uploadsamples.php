@@ -64,7 +64,7 @@
     <br>
     <button class="text-dark" id="uploadbutton">Upload</button>
 
-    <script src="sampleselling2.js"></script>
+    <script src="uploadsamples.js"></script>
 </body>
 
 </html>
