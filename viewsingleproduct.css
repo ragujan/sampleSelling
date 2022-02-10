@@ -1,0 +1,122 @@
+.black {
+    background-color: black;
+}
+
+.maincolor {
+    color: white;
+}
+
+.singlecontentdiv {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thesingleproductcontentdiv {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    min-height: 100vh;
+}
+
+.sampleImage {
+    width: 500px;
+    max-width: 100%;
+    object-fit: cover;
+    background-color: rgba(41, 41, 41, 0);
+}
+
+.sampleheaddiv {
+    position: relative;
+    font-size: 40px;
+    letter-spacing: 10px;
+    font-weight: bolder;
+}
+
+.sampledescription {
+    font-weight: lighter;
+}
+
+#borderLeft {
+    width: 25%;
+    position: absolute;
+    border-bottom: 2px solid white;
+    position: absolute;
+    right: 37.5%;
+}
+
+.sampleImageDiv {
+    border: 1px solid rgb(58, 58, 58);
+    margin-left: 5%;
+    border-radius: 2%;
+    box-shadow: inset 0px 0px 23px 5px #47474786;
+}
+@media(max-width:900px) {
+    .sampleImage {
+        width: 300px;
+        max-width: 100%;
+    }
+    .sampleImageDiv {
+        border: 1px solid rgba(185, 185, 185, 0.459);
+        margin-left: 0%;
+        border-radius: 2%;
+        box-shadow: 0px 0px 23px 5px #424242;
+    }
+}
+@media(max-width:576px) {
+    .sampleImage {
+        width: 300px;
+        max-width: 100%;
+    }
+    .sampleImageDiv {
+        border: 1px solid rgba(185, 185, 185, 0.459);
+        margin-left: 0%;
+        border-radius: 2%;
+        box-shadow: 0px 0px 23px 5px #424242;
+    }
+}
+
+.buyButton,
+.cartButton {
+    border: solid 2px #474747;
+    padding: 5%;
+    color: white;
+    background-color: black;
+    font-weight: bold;
+    font-size: 2vw;
+    border-radius: 2%;
+}
+
+.buyButton {
+    background-color: rgb(211, 19, 12);
+    transition: background-color 0.5s ease-in-out;
+    transition: color 0.5s ease-in;
+}
+
+.buyButton:hover {
+    background-color: rgb(0, 174, 255);
+    color: black;
+}
+
+.cartButton {
+    background-color: rgb(0, 255, 106);
+    color: black;
+    transition: background-color 0.5s ease-in-out;
+    transition: color 0.5s ease-in;
+}
+
+.cartButton:hover {
+    background-color: rgb(0, 174, 255);
+    color: black;
+}
+
+.thefooterdiv {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cardinfo {
+    font-size: 40px;
+}
+
+.paymentmethods {
+    width: 100px;
+}
