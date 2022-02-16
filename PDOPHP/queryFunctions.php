@@ -49,9 +49,10 @@ class queryFunctions extends DBh
     }
 
     public function subSampleType($id, $PG)
-    {
-        $cal =  $this->subSamplesQuery . "" . "WHERE subsampletype.subsampleID = ?;";
-
+    {   
+        //PG must be 0,4,8;
+        $cal =  $this->subSamplesQuery . " " . "WHERE subsampletype.subsampleID = ?;";
+       
         $statement1 = $this->connect()->prepare($cal);
         $statement1->execute([$id]);
         $this -> totalcount = count($statement1->fetchAll());
@@ -60,15 +61,15 @@ class queryFunctions extends DBh
             return $this->fetcharray;
         } else {
             // echo count($statement1->fetchAll());
-            $totalPages = ceil($this -> totalcount / 4);
+            // $totalPages = ceil($this -> totalcount / 4);
 
-            if ($PG >= $totalPages) {
-                $PG = $totalPages;
-            } else if ($PG <= 0) {
-                $PG = 0;
-            }
+            // if ($PG >= $totalPages) {
+            //     $PG = $totalPages;
+            // } else if ($PG <= 0) {
+            //     $PG = 0;
+            // }
 
-            $sql = $this->subSamplesQuery . "" ."WHERE subsampletype.subsampleID = ? LIMIT 4 OFFSET $PG  ";
+            $sql = $this->subSamplesQuery . " " ."WHERE subsampletype.subsampleID = ? LIMIT 4 OFFSET $PG  ";
 
             $statement2 = $this->connect()->prepare($sql);
             $statement2->execute([$id]);
@@ -108,11 +109,11 @@ class queryFunctions extends DBh
             // echo count($statement1->fetchAll());
             $totalPages = ceil($this -> totalcount / 4);
 
-            if ($PG >= $totalPages) {
-                $PG = $totalPages;
-            } else if ($PG <= 0) {
-                $PG = 0;
-            }
+            // if ($PG >= $totalPages) {
+            //     $PG = $totalPages;
+            // } else if ($PG <= 0) {
+            //     $PG = 0;
+            // }
 
             $sql = $this->sampleTypeQuery." "."WHERE sampletype.sampleTypeID = ? LIMIT 4 OFFSET $PG  ";
 

@@ -8,17 +8,24 @@ $A;
 $object = new queryFunctions();
 if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
     $A = $_POST["PG"];
+    echo $A;
+    echo "</br>";
     $subsampletypenumber = $_POST["SSTN"];
     $melody = $object->subSampleType($subsampletypenumber, $A);
     $totalCount = $object->returnTotalCount();
 } else if (isset($_POST["PG"])) {
 
     $A = $_POST["PG"];
+    echo $A." "."A and Received";
+    echo "</br>";
     $melody = $object->sampleType(1, $A);
     $totalCount = $object->returnTotalCount();
+    
 } else {
-
+    
     $A = 0;
+    echo $A." "."A";
+    echo "</br>";
     $melody = $object->sampleType(1, $A);
     $totalCount = $object->returnTotalCount();
 }
@@ -36,17 +43,17 @@ if ($melody[0] == "Nothing") {
     /*////////////PaginationPages///////////////////*/
     $searchobject = new Pagination();
 
-    echo $totalCount;
+    echo $totalCount." "."totalCount";
     echo "</br>";
     $searchobject->getNumber($totalCount);
     $outputpage = $searchobject->decidesPages($A);
-    echo $outputpage;
+    echo $outputpage." "."outputPage";
     echo "</br>";
     $stopnumber = $searchobject->returnStopNumber();
-    echo $stopnumber; 
+    echo $stopnumber." "."stop_Number"; 
     echo "</br>";
     $realreceivednumber = $searchobject->returnRealReceiveNumber();
-    echo $realreceivednumber;
+    echo $realreceivednumber." "."Real_Number"; ;
     echo "</br>";
     /*///////////////////////////////*/
     /*//////////////////*/
@@ -121,21 +128,12 @@ if ($melody[0] == "Nothing") {
         <div class="col-lg-6 offset-lg-3 col-12 offset-0">
             <div class="row">
                 <div class="col-2  text-center  d-grid ">
-                    <button id="prev" class=" nextButton" onclick="nextfunctionmelody('<?php echo $realreceivednumber  - 1; ?>',null);"><?php echo $realreceivednumber - 1; ?></button>
+                    <button id="prev" class=" nextButton" onclick="nextfunctionmelody('<?php echo $A  - 1; ?>',null);"><?php echo $A - 1; ?></button>
                 </div>
-                <div class="col-8">
-                    <?php
-                    for ($i = 0; $i < $stopnumber; $i++) {
-                    ?>
-                        <button id="prev" class=" nextButton" onclick="nextfunctionmelody('<?php echo ($i); ?>',null);"><?php echo ($i); ?></button>
-
-                    <?php
-                    }
-                    ?>
-                </div>
+              
 
                 <div class="col-2  text-center  d-grid">
-                    <button id="next" class=" nextButton" onclick="nextfunctionmelody('<?php echo $realreceivednumber  + 1; ?>',null);"><?php echo $realreceivednumber  + 1; ?></button>
+                    <button id="next" class=" nextButton" onclick="nextfunctionmelody('<?php echo ($A+1)  * 4; ?>',null);"><?php echo $A  + 1; ?></button>
                 </div>
             </div>
         </div>

@@ -27,8 +27,8 @@ class Pagination
             //$pagenumber = (( $this->stopnumber-1 ) * 1);
             $st= $this->stopnumber;
             //$pagenumber = ($st-1)*4;
-           // $receivednumber =  $this->stopnumber - 1;
-            $pagenumber =$this->stopnumber;
+            $receivednumber =  $this->stopnumber - 1;
+             $pagenumber =$this->stopnumber;
         } else {
             
             $pagenumber = ($receivednumber) * 4;
