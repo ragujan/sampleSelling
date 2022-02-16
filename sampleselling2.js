@@ -19,7 +19,7 @@ window.addEventListener('load', async () => {
       samplebox2.innerHTML = text
     })
 
-  let url2 = 'sampletypeDrums.php'
+  let url2 = 'sampletypeMelody.php'
   let def = await fetch(url2, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -61,7 +61,7 @@ function showsubsamples() {
   }
   form.append('PG', val)
 
-  let url = 'sampletypeMelody.php'
+  let url = 'SampleSellingPaginationMelodies.php'
   fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -91,7 +91,7 @@ function showsubsamplesdrums() {
 
 function nextfunctionmelody(x, y) {
   let sampleContainer = document.getElementById('thesamplecontainer1')
-  //sampleContainer.scrollIntoView()
+  sampleContainer.scrollIntoView()
 
   let val = x
   let sampleselect = y
@@ -104,7 +104,7 @@ function nextfunctionmelody(x, y) {
 
   form.append('PG', val)
 
-  let url = 'sampletypeMelody.php'
+  let url = 'SampleSellingPaginationMelodies.php'
   fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -128,7 +128,7 @@ function nextfunctiondrums(x, y) {
 
   form.append('PG', val)
 
-  let url = 'sampletypeMelody.php'
+  let url = 'samplesellingpaginationdrums.php'
   fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {

@@ -88,6 +88,7 @@ class SearchClass
 //     echo "<br/>";
 //     echo "<br/>";
 // }
+
 class Pagination extends SearchClass
 {
     public $pIndex;

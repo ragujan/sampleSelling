@@ -31,17 +31,17 @@ if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
 
 $mysearchquery = DB::forsearch("$Q");
 
+
+/*////////////PaginationPages///////////////////*/
 $searchobject = new Pagination();
 $searchobject->searchqueryinput = $mysearchquery;
 $searchedarrays = $searchobject->search();
 $tnums = $searchobject->returnrows();
-
 $searchobject->getNumber($tnums);
-
 $outputpage = $searchobject->decidesPages($A);
-
 $stopnumber = $searchobject->returnStopNumber();
 $realreceivednumber = $searchobject ->returnRealReceiveNumber();
+/*///////////////////////////////*/
 if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
 
     $manualQuery = "WHERE  subsampletype.subsampleID = '" . $subsampletypenumber . "' LIMIT 8 OFFSET $outputpage;";

@@ -7,7 +7,7 @@ $A;
 if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
     $A = $_POST["PG"];
     $subsampletypenumber = $_POST["SSTN"];
-  
+
     $Q = "SELECT * FROM subsampletype 
     INNER JOIN samples ON samples.SubsampleID=subsampletype.subsampleID 
     WHERE subsampletype.subsampleID = '" . $subsampletypenumber . "' ;";
@@ -15,7 +15,7 @@ if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
 } else if (isset($_POST["PG"])) {
 
     $A = $_POST["PG"];
- 
+
     $Q = "SELECT * FROM subsampletype 
     INNER JOIN samples ON samples.SubsampleID=subsampletype.subsampleID 
     WHERE subsampletype.sampleTypeID='2' ";
@@ -26,7 +26,6 @@ if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
     INNER JOIN samples ON samples.SubsampleID=subsampletype.subsampleID 
     WHERE subsampletype.sampleTypeID='2' ";
     $manualQuery = "WHERE subsampletype.sampleTypeID='2' LIMIT 8 OFFSET $outputpage";
-  
 }
 
 $mysearchquery = DB::forsearch("$Q");
@@ -42,7 +41,7 @@ $outputpage = $searchobject->decidesPages($A);
 
 
 $stopnumber = $searchobject->returnStopNumber();
-$realreceivednumber = $searchobject ->returnRealReceiveNumber();
+$realreceivednumber = $searchobject->returnRealReceiveNumber();
 if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
 
     $manualQuery = "WHERE  subsampletype.subsampleID = '" . $subsampletypenumber . "' LIMIT 8 OFFSET $outputpage;";
@@ -50,7 +49,7 @@ if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
 
 
     $manualQuery = "WHERE subsampletype.sampleTypeID='2' LIMIT 8 OFFSET $outputpage";
-} 
+}
 
 $paginationsearchQuery = DB::forsearch("SELECT 
 samples.sampleID,samples.Sample_Name,
@@ -158,7 +157,7 @@ if ($paginationOBjectArrays[0] == "Nothing") {
                                 <?php
                                 for ($i = 0; $i < $stopnumber; $i++) {
                                 ?>
-                                    <button id="prev" class=" nextButton" onclick="nextfunctiondrums('<?php echo ($i); ?>','<?php echo $subsampletypenumber; ?>');"><?php echo ($i ); ?></button>
+                                    <button id="prev" class=" nextButton" onclick="nextfunctiondrums('<?php echo ($i); ?>','<?php echo $subsampletypenumber; ?>');"><?php echo ($i); ?></button>
 
                                 <?php
                                 }
@@ -166,7 +165,7 @@ if ($paginationOBjectArrays[0] == "Nothing") {
                             </div>
 
                             <div class="col-2  text-center  d-grid">
-                                <button id="next" class=" nextButton" onclick="nextfunctiondrums('<?php echo $realreceivednumber  + 1; ?>','<?php echo $subsampletypenumber; ?>');"><?php echo  $realreceivednumber ; ?></button>
+                                <button id="next" class=" nextButton" onclick="nextfunctiondrums('<?php echo $realreceivednumber  + 1; ?>','<?php echo $subsampletypenumber; ?>');"><?php echo  $realreceivednumber; ?></button>
                             </div>
                         </div>
                     </div>
@@ -182,13 +181,13 @@ if ($paginationOBjectArrays[0] == "Nothing") {
                     <div class="col-lg-6 offset-lg-3 col-12 offset-0">
                         <div class="row">
                             <div class="col-2  text-center  d-grid ">
-                                <button id="prev" class=" nextButton" onclick="nextfunctiondrums('<?php echo $realreceivednumber  - 1; ?>',null);"><?php echo $realreceivednumber -1; ?></button>
+                                <button id="prev" class=" nextButton" onclick="nextfunctiondrums('<?php echo $realreceivednumber  - 1; ?>',null);"><?php echo $realreceivednumber - 1; ?></button>
                             </div>
                             <div class="col-8">
                                 <?php
                                 for ($i = 0; $i < $stopnumber; $i++) {
                                 ?>
-                                    <button id="prev" class=" nextButton" onclick="nextfunctiondrums('<?php echo ($i); ?>',null);"><?php echo ($i ); ?></button>
+                                    <button id="prev" class=" nextButton" onclick="nextfunctiondrums('<?php echo ($i); ?>',null);"><?php echo ($i); ?></button>
 
                                 <?php
                                 }
