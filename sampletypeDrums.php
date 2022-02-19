@@ -1,28 +1,38 @@
 <?php
 require "PDOPHP/queryFunctions.php";
+require "PDOPHP/Pagination.php";
 $pagenumber;
+$allowedPages = 0;
 $stopnumber = 0;
 $outputpage = 0;
 $A;
+
 $object = new queryFunctions();
 if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
     $A = $_POST["PG"];
     $subsampletypenumber = $_POST["SSTN"];
-    $melody = $object->subSampleType($subsampletypenumber, $A);
-
+    $melody = $object->subSampleType($subsampletypenumber, $A * 2);
+    $totalCount = $object->returnTotalCount();
+    $allowedPages = ceil($totalCount / 4);
 } else if (isset($_POST["PG"])) {
-
     $A = $_POST["PG"];
-    $melody = $object->sampleType(2, $A);
-
+    $samplePage = $object->sampleTypePages(1);
+    if ($A >= $samplePage) {
+        $A = $samplePage;
+    } else if ($A <= 0) {
+        $A = 0;
+    }
+    $melody = $object->sampleType(2, $A * 2);
+    $totalCount = $object->returnTotalCount();
+    $allowedPages = ceil($totalCount / 2);
 } else {
-
-    $A = 0; 
-    $melody = $object->sampleType(2, $A);
-    
+    $A = 0;
+    $melody = $object->sampleType(2, $A * 2);
+    $totalCount = $object->returnTotalCount();
+    $allowedPages = ceil($totalCount / 2);
 }
 
-if ($melody[0] == "Nothing") {
+if (count($melody) == 0 or $melody[0] == "Nothing") {
 ?>
     <div class="row">
         <div class="col-12 text-center text-white">
@@ -31,6 +41,7 @@ if ($melody[0] == "Nothing") {
     </div>
 <?php
 } else {
+
 ?>
     <div id="thesamplecontainer2" class="row thesamplecontainer1  ">
         <div class="col-12">
@@ -44,7 +55,7 @@ if ($melody[0] == "Nothing") {
                     $imagePath =  $melodydetails[$i]["source_URL"];;
                     $audioPath = $melodydetails[$i]["sampleAudioSrc"];
                 ?>
-                    <div class="col-lg-3 py-3  col-md-4 offset-md-0 col-10 offset-1">
+                    <div class="col-lg-3 py-3  col-md-4 offset-md-0 col-sm-6 offset-sm-3 col-10 offset-1">
                         <div class="row">
                             <div class="col-10 beatpackdiv py-lg-3 py-md-2 py-2 offset-1">
                                 <div class="row">
@@ -86,9 +97,31 @@ if ($melody[0] == "Nothing") {
 
             </div>
         </div>
+        <div class="col-12 mt-5 py-1 text-center  navbuttons">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-12 offset-0">
 
+                    <div class="row">
+                        <div class="col  text-center  d-grid ">
+                            <button id="prev" class=" nextButton" onclick="nextfunctionmelody('<?php echo ($A - 1); ?>',null);"><?php echo "Prev"; ?></button>
+                        </div>
+                        <?php
+
+                        require "PDOPHP/PageButtons.php";
+                        $P = new PageButtons();
+                        $pageBtn = $P->produceBtns(6, $A, 3);
+                        ?>
+                        <div class="col  text-center  d-grid">
+                            <button id="next" class=" nextButton" onclick="nextfunctionmelody('<?php echo ($A + 1); ?>',null);"><?php echo "Next"; ?></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
     </div>
+
 <?php
 }
 
