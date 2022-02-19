@@ -95,8 +95,8 @@ body {
     max-width: 100%;
     object-fit: contain;
 }
-
-.beatPACKIMAGE:hover {}
+/* 
+.beatPACKIMAGE:hover {} */
 
 @keyframes rotateBeatPackImage {
     to {
@@ -162,7 +162,7 @@ body {
     
 }
 
-.navbuttons {}
+/* .navbuttons {} */
 
 .audiopreviewdiv {
     position: relative;
@@ -300,7 +300,7 @@ body {
     }
 }
 
-.therollercontentdiv {}
+/* .therollercontentdiv {} */
 
 .cardinfo {
     font-size: 30px;
