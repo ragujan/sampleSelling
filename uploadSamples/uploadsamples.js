@@ -29,10 +29,7 @@ sampletypeselect.addEventListener('change', () => {
     fetch(loc, { method: "GET" })
         .then(response => response.text())
         .then(text => {
-
             subsample.innerHTML = text;
-
-
         })
 
 })

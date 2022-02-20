@@ -10,7 +10,7 @@ class queryFunctions extends DBh
     public $totalcount;
     public $fetcharray;
 
-    public $subSamplesQuery = "SELECT * FROM samples 
+    private $subSamplesQuery = "SELECT * FROM samples 
     INNER JOIN subsampletype
     ON subsampletype.subsampleID =samples.SubsampleID
     INNER JOIN sampletype
@@ -20,7 +20,7 @@ class queryFunctions extends DBh
     INNER JOIN sampleimages
     ON sampleimages.sampleID=samples.sampleID";
 
-    public $sampleTypeQuery = "SELECT * FROM samples 
+    private $sampleTypeQuery = "SELECT * FROM samples 
     INNER JOIN subsampletype
     ON subsampletype.subsampleID =samples.SubsampleID
     INNER JOIN sampletype

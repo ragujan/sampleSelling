@@ -11,7 +11,7 @@ window.addEventListener('load', async () => {
 
   let form = new FormData()
   // form.append('PG', val)
-  let url = 'sampletypeMelody.php'
+  let url = "../showsamples/sampletypeMelody.php";
   let abc = await fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -19,7 +19,7 @@ window.addEventListener('load', async () => {
       samplebox2.innerHTML = text
     })
 
-  let url2 = 'sampletypeDrums.php'
+  let url2 = "../showsamples/sampletypeDrums.php";
   let def = await fetch(url2, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -33,7 +33,7 @@ async function  loadwin(){
 
   let form = new FormData()
   form.append('PG', val)
-  let url = 'SampleSellingPaginationMelodies.php'
+  let url = 'SampleSellingPaginationMelodies.php';
   let abc = await fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -41,7 +41,7 @@ async function  loadwin(){
       samplebox2.innerHTML = text
     })
 
-  let url2 = 'samplesellingpaginationdrums.php'
+  let url2 = 'samplesellingpaginationdrums.php';
   let def = await fetch(url2, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -61,7 +61,7 @@ function showsubsamples() {
   }
   form.append('PG', val)
 
-  let url = 'sampletypeMelody.php'
+  let url = "../showsamples/sampletypeMelody.php";
   fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -80,7 +80,7 @@ function showsubsamplesdrums() {
     form.append('SSTN', sampleselect)
   }
 
-  let url = 'samplesellingpaginationdrums.php'
+  let url = "../showsamples/sampletypeDrums.php";
   fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -104,7 +104,7 @@ function nextfunctionmelody(x, y) {
 
   form.append('PG', val)
 
-  let url = 'sampletypeMelody.php'
+  let url = "../showsamples/sampletypeMelody.php";
   fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -160,3 +160,14 @@ function pausemusic(x) {
 function viewbuy(x) {
   window.location = 'viewsingleproduct.php?X=' + x
 }
+let searchButton = document.getElementById('searchButton');
+
+searchButton.addEventListener('click',()=>{
+  let sBox = document.getElementById('searchBox');
+  
+
+  
+})
+
+
+

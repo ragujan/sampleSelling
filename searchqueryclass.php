@@ -46,7 +46,7 @@ class Search
                         <div class="col-12 col-md-10 offset-md-1 beatpackdiv py-lg-3 py-md-2 py-1 offset-0">
                             <div class="row">
                                 <div class="col-12 audiopreviewdiv">
-                                    <img src="BrymoImages/BeatpackImage.png" class="beatPACKIMAGE mostsold" alt="">
+                                    <img src="../BrymoImages/BeatpackImage.png" class="beatPACKIMAGE mostsold" alt="">
 
 
                                 </div>

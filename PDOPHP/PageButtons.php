@@ -2,7 +2,7 @@
 
 class PageButtons
 {
-    public function produceBtns($totalpages, $currentPage, $buttonPerPages, $subSampleType)
+    public function produceBtns($totalpages, $currentPage, $subSampleType)
     {
         $A = $currentPage;
 ?>
