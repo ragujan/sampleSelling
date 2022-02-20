@@ -1,5 +1,5 @@
 <?php
-require "DB/DB.php";
+require "../DB/DB.php";
 
 ?>
 <!DOCTYPE html>
@@ -9,8 +9,8 @@ require "DB/DB.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="bootstrap.css">
-    <link rel="stylesheet" href="sampleselling.css">
+    <link rel="stylesheet" href="../style/bootstrap.css">
+    <link rel="stylesheet" href="../style/sampleselling.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 
     <title>BeatSample</title>
@@ -37,7 +37,7 @@ require "DB/DB.php";
                                         <div class="col-10 text-center col-lg-6 fs-5 offset-1 fw-light offset-lg-3 my-2">
                                             <div class="row">
                                                 <div class="col-4 navlinksdiv"><a class="navlinks text-decoration-none " href="home.php">Home</a></div>
-                                                <div class="col-4 navlinksdiv"><a class="navlinks text-decoration-none" href="sampleselling.php">Samples</a></div>
+                                                <div class="col-4 navlinksdiv"><a class="navlinks text-decoration-none" href="../showsamples/sampleselling.php">Samples</a></div>
                                                 <div class="col-4 navlinksdiv"><a class="navlinks text-decoration-none" href="#">Contact</a></div>
                                             </div>
                                         </div>
@@ -67,7 +67,7 @@ require "DB/DB.php";
                         <div class="col-12   homevideodiv">
                             <div class="back1">
                                 <video id="background-video" class="homevideo" autoplay loop muted>
-                                    <source src="RagVideo/home2.mp4" type="video/mp4">
+                                    <source src="../RagVideo/home2.mp4" type="video/mp4">
                                 </video>
                             </div>
 
@@ -81,7 +81,7 @@ require "DB/DB.php";
                                                 <p class=" des  text-white-50">Get high quality samples from RAG</p>
                                             </div>
                                             <div class="col-12 text-center ">
-                                                <img src="RagImages/RAG JNTransparent.png" class="ragnormal" alt="">
+                                                <img src="../RagImages/RAG JNTransparent.png" class="ragnormal" alt="">
                                             </div>
                                         </div>
 
@@ -96,7 +96,7 @@ require "DB/DB.php";
                                     <div class="col-12 col-sm-6 d-block d-sm-none text-center">
                                         <div class="row">
                                             <div class="col-lg-8 d-none offset-lg-2 col-12 offset-0">
-                                                <img src="RagImages/RAG JN.png" class=" secondlogoimage" alt="">
+                                                <img src="../RagImages/RAG JN.png" class=" secondlogoimage" alt="">
 
                                             </div>
                                         </div>
@@ -136,7 +136,7 @@ require "DB/DB.php";
                                         </div>
                                         <div class="col-12 offset-0 col-md-8 offset-md-2">
                                             <?php
-                                            require "searchqueryclass.php";
+                                            require "../searchqueryclass.php";
 
                                             ?>
                                             <div class="row">
@@ -216,18 +216,18 @@ require "DB/DB.php";
                         <div class="col-12 pt-2 pb-5">
                             <div class="row">
                                 <div class="col text-center">
-                                    <img src="paymentMethods/1.png" class="paymentmethods" alt="">
+                                    <img src="../paymentMethods/1.png" class="paymentmethods" alt="">
                                 </div>
                                 <div class="col text-center">
-                                    <img src="paymentMethods/2.png" class="paymentmethods" alt="">
+                                    <img src="../paymentMethods/2.png" class="paymentmethods" alt="">
                                 </div>
                                 <div class="col text-center">
-                                    <img src="paymentMethods/3.png" class="paymentmethods" alt="">
+                                    <img src="../paymentMethods/3.png" class="paymentmethods" alt="">
                                 </div>
                                 <div class="col text-center">
-                                    <img src="paymentMethods/4.png" class="paymentmethods" alt="">
+                                    <img src="../paymentMethods/4.png" class="paymentmethods" alt="">
                                 </div>   <div class="col text-center">
-                                    <img src="paymentMethods/5.png" class="paymentmethods" alt="">
+                                    <img src="../paymentMethods/5.png" class="paymentmethods" alt="">
                                 </div>
                             </div>
                         </div>
