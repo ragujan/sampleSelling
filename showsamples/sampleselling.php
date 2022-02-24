@@ -61,10 +61,14 @@
 
                         <div class="thecontentdiv  col-12">
                             <div class="row">
-                                <div class="col-12  text-center">
+                                <div class="col-7  text-end">
                                     <h1 class="sampleheading text-white">Samples & Drums</h1>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-5  text-end">
+                                    <input id="searchBox" class="text-dark" type="text">
+                                    <button id="searchButton" class="text-dark">Search</button>
+                                </div>
+                                <div id="mainsampleDiv" class="col-12">
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="row">
@@ -83,7 +87,7 @@
                                                         <div class="col-lg-4 col-md-4 col-5 text-start">
                                                             <select name="" onchange="showsubsamples();" class="selectTAG py-2 px-1" id="subSampleMelodyID">
                                                                 <?php
-                                                              
+
                                                                 require "../DB/DB.php";
                                                                 $mysearchquery = DB::forsearch("SELECT * FROM `subsampletype` WHERE `sampleTypeID` IN(SELECT `sampleTypeID` FROM `sampletype` WHERE `typeName`='Melodies');");
                                                                 $searchobject = new SearchClass();
@@ -121,10 +125,7 @@
 
                                                             </select>
                                                         </div>
-                                                        <div class="col-lg-7 col-md-6 col-4 text-start">
-                                                            <input id="searchBox" class="text-dark" type="text">
-                                                            <button id="searchButton" class="text-dark">Search</button>
-                                                        </div>
+
                                                     </div>
 
 
@@ -153,7 +154,7 @@
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
                                                             <select name="" onchange="showsubsamplesdrums();" class="selectTAG py-2 px-1" id="subSampleDrumID">
                                                                 <?php
-                                                                
+
                                                                 $mysearchquery = DB::forsearch("SELECT * FROM `subsampletype` WHERE `sampleTypeID` IN(SELECT `sampleTypeID` FROM `sampletype` WHERE `typeName`='Drums');");
                                                                 $searchobject = new SearchClass();
                                                                 $searchobject->searchqueryinput = $mysearchquery;
@@ -199,7 +200,9 @@
 
                                     </div>
                                 </div>
+                                <div id="showmelodySearchsamples" class="col-12 py-5">
 
+                                </div>
                             </div>
                         </div>
                     </div>
