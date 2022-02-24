@@ -5,30 +5,62 @@ $pagenumber;
 $allowedPages = 0;
 $stopnumber = 0;
 $outputpage = 0;
+$valueforBTN =0;
 $A;
 
 $object = new queryFunctions();
 if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
-    $A = $_POST["PG"];
-    $subsampletypenumber = $_POST["SSTN"];
-    $melody = $object->subSampleType($subsampletypenumber, $A * 2);
-    $totalCount = $object->returnTotalCount();
-    $allowedPages = ceil($totalCount / 4);
+     
+    $A = $_POST["PG"];  
+    $subsampletypenumber = $_POST["SSTN"];  
+    if($subsampletypenumber =="null"){
+        
+        $valueforBTN = "null";
+        
+        $samplePage = $object->sampleTypePages(2);
+        if ($A >= $samplePage) {
+            $A = $samplePage;
+        } else if ($A <= 0) {
+            $A = 0;
+        }
+        $melody = $object->sampleType(2, $A * 2);
+        $totalCount = $object->returnTotalCount();   
+        $allowedPages = ceil($totalCount / 2);
+
+
+    }else{
+        $valueforBTN = $subsampletypenumber;
+       
+        $samplePage = $object->subSampleTypePages($subsampletypenumber);
+        if ($A >= $samplePage) {
+            $A = $samplePage;
+        } else if ($A <= 0) {
+            $A = 0;
+        }
+    
+        $melody = $object->subSampleType($subsampletypenumber, $A * 2);
+        $totalCount = $object->returnTotalCount();   
+        $allowedPages = ceil($totalCount / 2);
+    }
+
 } else if (isset($_POST["PG"])) {
     $A = $_POST["PG"];
-    $samplePage = $object->sampleTypePages(1);
+    
+    $valueforBTN = "null";
+    $samplePage = $object->sampleTypePages(2);
     if ($A >= $samplePage) {
         $A = $samplePage;
     } else if ($A <= 0) {
         $A = 0;
     }
     $melody = $object->sampleType(2, $A * 2);
-    $totalCount = $object->returnTotalCount();
+    $totalCount = $object->returnTotalCount();   
     $allowedPages = ceil($totalCount / 2);
 } else {
     $A = 0;
+    $valueforBTN = "null";
     $melody = $object->sampleType(2, $A * 2);
-    $totalCount = $object->returnTotalCount();
+    $totalCount = $object->returnTotalCount();  
     $allowedPages = ceil($totalCount / 2);
 }
 
@@ -66,8 +98,8 @@ if (count($melody) == 0 or $melody[0] == "Nothing") {
                                             Your browser does not support the audio element.
                                         </audio>
                                         <img src="../<?php echo  $imagePath; ?>" class="beatPACKIMAGE" alt="">
-                                        <img id="playmusic<?php echo $melodyID ?>" onclick="playmusic('<?php echo $melodyID ?>');" class="playcolrols audiopreview" src="BrymoImages/play-button.png" alt="">
-                                        <img id="pausemusic<?php echo $melodyID ?>" onclick="pausemusic('<?php echo $melodyID ?>');" class="playcolrols audiopreview d-none" src="BrymoImages/pause.png" alt="">
+                                        <img id="playmusic<?php echo $melodyID ?>" onclick="playmusic('<?php echo $melodyID ?>');" class="playcolrols audiopreview" src="../BrymoImages/play-button.png" alt="">
+                                        <img id="pausemusic<?php echo $melodyID ?>" onclick="pausemusic('<?php echo $melodyID ?>');" class="playcolrols audiopreview d-none" src="../BrymoImages/pause.png" alt="">
                                     </div>
                                     <div class="col-12 pt-2">
                                         <div class="row">
@@ -97,23 +129,17 @@ if (count($melody) == 0 or $melody[0] == "Nothing") {
 
             </div>
         </div>
-        <div class="col-12 mt-5 py-1 text-center  navbuttons">
+        <div class="col-10 offset-1 col-md-12 offset-md-0 mt-5 py-1 text-center  navbuttons">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-12 offset-0">
 
                     <div class="row">
-                        <div class="col  text-center  d-grid ">
-                            <button id="prev" class=" nextButton" onclick="nextfunctionmelody('<?php echo ($A - 1); ?>',null);"><?php echo "Prev"; ?></button>
-                        </div>
                         <?php
-
                         require "../PDOPHP/PageButtons.php";
                         $P = new PageButtons();
-                        $pageBtn = $P->produceBtns(6, $A, 3);
+                      
+                        $pageBtn = $P->produceBtns($allowedPages, $A,$valueforBTN,"nextfunctiondrums");
                         ?>
-                        <div class="col  text-center  d-grid">
-                            <button id="next" class=" nextButton" onclick="nextfunctionmelody('<?php echo ($A + 1); ?>',null);"><?php echo "Next"; ?></button>
-                        </div>
                     </div>
                 </div>
             </div>

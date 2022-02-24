@@ -7,11 +7,11 @@ let uploadAudioOnly = document.getElementById('uploadAudioOnly')
 let uploadImageOnly = document.getElementById('uploadImageOnly')
 
 window.addEventListener('load', async () => {
-//  let val = 0
+  //  let val = 0
 
   let form = new FormData()
   // form.append('PG', val)
-  let url = "../showsamples/sampletypeMelody.php";
+  let url = '../showsamples/sampletypeMelody.php'
   let abc = await fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -19,7 +19,7 @@ window.addEventListener('load', async () => {
       samplebox2.innerHTML = text
     })
 
-  let url2 = "../showsamples/sampletypeDrums.php";
+  let url2 = '../showsamples/sampletypeDrums.php'
   let def = await fetch(url2, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -27,13 +27,12 @@ window.addEventListener('load', async () => {
       samplebox2.innerHTML = text
     })
 })
-async function  loadwin(){
-
+async function loadwin() {
   let val = 1
 
   let form = new FormData()
   form.append('PG', val)
-  let url = 'SampleSellingPaginationMelodies.php';
+  let url = 'SampleSellingPaginationMelodies.php'
   let abc = await fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -41,15 +40,13 @@ async function  loadwin(){
       samplebox2.innerHTML = text
     })
 
-  let url2 = 'samplesellingpaginationdrums.php';
+  let url2 = 'samplesellingpaginationdrums.php'
   let def = await fetch(url2, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
       let samplebox2 = document.getElementById('showdrumsamples')
       samplebox2.innerHTML = text
     })
-
-
 }
 function showsubsamples() {
   let val = 0
@@ -61,7 +58,7 @@ function showsubsamples() {
   }
   form.append('PG', val)
 
-  let url = "../showsamples/sampletypeMelody.php";
+  let url = '../showsamples/sampletypeMelody.php'
   fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -80,7 +77,7 @@ function showsubsamplesdrums() {
     form.append('SSTN', sampleselect)
   }
 
-  let url = "../showsamples/sampletypeDrums.php";
+  let url = '../showsamples/sampletypeDrums.php'
   fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -91,20 +88,21 @@ function showsubsamplesdrums() {
 
 function nextfunctionmelody(x, y) {
   let sampleContainer = document.getElementById('thesamplecontainer1')
-  //sampleContainer.scrollIntoView()
-
+  // sampleContainer.scrollIntoView()
+  console.log(x, y)
   let val = x
   let sampleselect = y
   let form = new FormData()
 
   if (y !== null) {
-    
     form.append('SSTN', sampleselect)
+  } else {
+    alert('hey')
   }
 
   form.append('PG', val)
 
-  let url = "../showsamples/sampletypeMelody.php";
+  let url = '../showsamples/sampletypeMelody.php'
   fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
@@ -112,28 +110,49 @@ function nextfunctionmelody(x, y) {
       samplebox.innerHTML = text
     })
 }
-
 function nextfunctiondrums(x, y) {
-  let sampleContainer = document.getElementById('thesamplecontainer2')
-  //sampleContainer.scrollIntoView();
-
+  let sampleContainer = document.getElementById('thesamplecontainer1')
+  // sampleContainer.scrollIntoView()
+  console.log(x, y)
   let val = x
   let sampleselect = y
   let form = new FormData()
 
   if (y !== null) {
- 
     form.append('SSTN', sampleselect)
+  } else {
+    alert('hey')
   }
 
   form.append('PG', val)
 
-  let url = 'sampletypeMelody.php'
+  let url = '../showsamples/sampletypeDrums.php'
   fetch(url, { body: form, method: 'POST' })
     .then((response) => response.text())
     .then((text) => {
-  
       let samplebox = document.getElementById('showdrumsamples')
+      samplebox.innerHTML = text
+    })
+}
+
+function nextfunctionsearch(x, y) {
+  let val = x
+  let sampleselect = y
+  let form = new FormData()
+
+  if (y !== null) {
+    form.append('searchText', sampleselect)
+  }
+
+  form.append('PG', val)
+
+  let url = '../showsamples/bySearch.php'
+  fetch(url, { body: form, method: 'POST' })
+    .then((response) => response.text())
+    .then((text) => {
+      let mainsampleBox = document.getElementById('mainsampleDiv')
+
+      let samplebox = document.getElementById('showmelodySearchsamples')
       samplebox.innerHTML = text
     })
 }
@@ -160,14 +179,19 @@ function pausemusic(x) {
 function viewbuy(x) {
   window.location = 'viewsingleproduct.php?X=' + x
 }
-let searchButton = document.getElementById('searchButton');
+let searchButton = document.getElementById('searchButton')
 
-searchButton.addEventListener('click',()=>{
-  let sBox = document.getElementById('searchBox');
-  
-
-  
+searchButton.addEventListener('click', () => {
+  let sBox = document.getElementById('searchBox')
+  let form = new FormData()
+  form.append('searchText', sBox.value)
+  let url = '../showsamples/bySearch.php'
+  fetch(url, { body: form, method: 'POST' })
+    .then((response) => response.text())
+    .then((text) => {
+      let mainsampleBox = document.getElementById('mainsampleDiv')
+      mainsampleBox.classList.add('d-none')
+      let samplebox = document.getElementById('showmelodySearchsamples')
+      samplebox.innerHTML = text
+    })
 })
-
-
-

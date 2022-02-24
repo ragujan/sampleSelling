@@ -13,19 +13,39 @@ if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
      
     $A = $_POST["PG"];  
     $subsampletypenumber = $_POST["SSTN"];  
-    $valueforBTN = $subsampletypenumber;
-    $samplePage = $object->subSampleTypePages($subsampletypenumber);
-    if ($A >= $samplePage) {
-        $A = $samplePage;
-    } else if ($A <= 0) {
-        $A = 0;
+    if($subsampletypenumber =="null"){
+        
+        $valueforBTN = "null";
+        
+        $samplePage = $object->sampleTypePages(1);
+        if ($A >= $samplePage) {
+            $A = $samplePage;
+        } else if ($A <= 0) {
+            $A = 0;
+        }
+        $melody = $object->sampleType(1, $A * 2);
+        $totalCount = $object->returnTotalCount();   
+        $allowedPages = ceil($totalCount / 2);
+
+
+    }else{
+        $valueforBTN = $subsampletypenumber;
+       
+        $samplePage = $object->subSampleTypePages($subsampletypenumber);
+        if ($A >= $samplePage) {
+            $A = $samplePage;
+        } else if ($A <= 0) {
+            $A = 0;
+        }
+    
+        $melody = $object->subSampleType($subsampletypenumber, $A * 2);
+        $totalCount = $object->returnTotalCount();   
+        $allowedPages = ceil($totalCount / 2);
     }
 
-    $melody = $object->subSampleType($subsampletypenumber, $A * 2);
-    $totalCount = $object->returnTotalCount();   
-    $allowedPages = ceil($totalCount / 2);
 } else if (isset($_POST["PG"])) {
     $A = $_POST["PG"];
+    
     $valueforBTN = "null";
     $samplePage = $object->sampleTypePages(1);
     if ($A >= $samplePage) {
@@ -33,7 +53,6 @@ if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
     } else if ($A <= 0) {
         $A = 0;
     }
-     
     $melody = $object->sampleType(1, $A * 2);
     $totalCount = $object->returnTotalCount();   
     $allowedPages = ceil($totalCount / 2);
@@ -118,8 +137,8 @@ if (count($melody) == 0 or $melody[0] == "Nothing") {
                         <?php
                         require "../PDOPHP/PageButtons.php";
                         $P = new PageButtons();
-                        
-                        $pageBtn = $P->produceBtns($allowedPages, $A,$valueforBTN);
+                      
+                        $pageBtn = $P->produceBtns($allowedPages, $A,$valueforBTN,"nextfunctionmelody");
                         ?>
                     </div>
                 </div>

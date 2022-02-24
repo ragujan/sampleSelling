@@ -5,40 +5,45 @@ $pagenumber;
 $allowedPages = 0;
 $stopnumber = 0;
 $outputpage = 0;
-$valueforBTN =0;
+$valueforBTN = 0;
 $A;
 
 $object = new queryFunctions();
-if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {     
-    $A = $_POST["PG"];  
-    $subsampletypenumber = $_POST["SSTN"];  
-    $valueforBTN = $subsampletypenumber;
-    $samplePage = $object->subSampleTypePages($subsampletypenumber);
+  if (isset($_POST["PG"]) && isset($_POST["searchText"])) {
+    $A = $_POST["PG"];
+    $searchText = $_POST["searchText"];
+    $valueforBTN = $searchText;
+    $samplePage = $object->searchByTextPages($searchText);
     if ($A >= $samplePage) {
         $A = $samplePage;
     } else if ($A <= 0) {
         $A = 0;
     }
-    $melody = $object->subSampleType($subsampletypenumber, $A * 2);
-    $totalCount = $object->returnTotalCount();   
+    
+    $melody = $object->searchByText($searchText, $A * 2);
+    $totalCount = $object->returnTotalCount();
     $allowedPages = ceil($totalCount / 2);
-} else if (isset($_POST["PG"])) {
-    $A = $_POST["PG"];
-    $valueforBTN = "null";
-    $samplePage = $object->sampleTypePages(1);
+}else if (isset($_POST["searchText"])) {
+    $A = 0;
+   
+    $searchText = $_POST["searchText"];
+    
+    $valueforBTN = $searchText;
+    $samplePage = $object->searchByTextPages($searchText);
     if ($A >= $samplePage) {
         $A = $samplePage;
     } else if ($A <= 0) {
         $A = 0;
-    }     
-    $melody = $object->sampleType(1, $A * 2);
-    $totalCount = $object->returnTotalCount();   
+    }
+    $melody = $object->searchByText($searchText, 0);
+    $totalCount = $object->returnTotalCount();
     $allowedPages = ceil($totalCount / 2);
 } else {
+
     $A = 0;
     $valueforBTN = "null";
-    $melody = $object->sampleType(1, $A * 2);
-    $totalCount = $object->returnTotalCount();  
+    $melody = $object->searchByText($searchText, $A * 2);
+    $totalCount = $object->returnTotalCount();
     $allowedPages = ceil($totalCount / 2);
 }
 
@@ -116,8 +121,9 @@ if (count($melody) == 0 or $melody[0] == "Nothing") {
                         require "../PDOPHP/PageButtons.php";
                         $P = new PageButtons();
                         
-                        $pageBtn = $P->produceBtns($allowedPages, $A,$valueforBTN);
+                        $pageBtn = $P->produceBtns($allowedPages, $A,$valueforBTN, "nextfunctionsearch");
                         ?>
+
                     </div>
                 </div>
             </div>

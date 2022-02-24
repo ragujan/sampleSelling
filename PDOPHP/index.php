@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,9 +8,11 @@
     <link rel="stylesheet" href="../style/bootstrap.css">
     <title>Document</title>
 </head>
+
 <body>
     <button class="btn btn-danger">Hey</button>
 </body>
+
 </html>
 <?php
 
@@ -25,27 +28,49 @@ $object = new queryFunctions();
 //     echo "</br>";
 //     echo "</br>";
 // }
-$bc =$object->subSampleType(1,2);
+$bc = $object->subSampleType(1, 2);
 print_r($bc);
 echo "</br>";
 echo "</br>";
 echo "</br>";
 echo count($bc);
-for($i=0; $i <count($bc);$i++){
+for ($i = 0; $i < count($bc); $i++) {
     echo $bc[$i][1];
     echo "</br>";
     echo "</br>";
 }
 echo "</br>";
 echo "</br>";
-$melody = $object -> sampleType(1,0);
+$melody = $object->sampleType(1, 0);
 print_r($melody);
 echo "</br>";
 echo "</br>";
 echo "</br>";
 echo count($bc);
-for($i=0; $i <count($melody);$i++){
+for ($i = 0; $i < count($melody); $i++) {
     echo $melody[$i][1];
     echo "</br>";
     echo "</br>";
 }
+
+$search = $object ->searchByText("a",0);
+print_r($search);
+// $keywords = preg_split('/[\s]+/', "ragJNJNN RTTR Bronx DeBx");
+
+// $totalKeywords = count($keywords);
+// echo $totalKeywords;
+// $query = "SELECT * FROM prodsTable WHERE itemTitle LIKE ?";
+// for ($i = 1; $i < $totalKeywords; $i++) {
+//     $query .= " AND itemTitle LIKE ? ";
+//     echo "NOPE";
+// }
+// echo "<br/>";
+// echo $query;
+// echo "<br/>";
+// foreach($keywords as $key => $keyword){
+//     //$sql->bindValue($key+1, '%'.$keyword.'%');
+//     echo $key+1;
+//     echo "<br/>";
+//     echo $keyword;
+//     echo "<br/>";
+//   }
