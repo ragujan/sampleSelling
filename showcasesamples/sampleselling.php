@@ -28,7 +28,7 @@
                         <div class="col-12 py-3">
                             <div class="row">
                                 <div class="col-4 text-center py-2">
-                                    <a href="#"> <img class="sitelogo" src="RagImages/RAG JN.png" alt="">
+                                    <a href="#"> <img class="sitelogo" src="../RagImages/RAG JN.png" alt="">
                                     </a>
                                 </div>
 
@@ -83,7 +83,7 @@
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
                                                             <select name="" onchange="showsubsamples();" class="selectTAG py-2 px-1" id="subSampleMelodyID">
                                                                 <?php
-                                                                require "DB\DB.php";
+                                                                require "../DB/DB.php";
                                                                 $mysearchquery = DB::forsearch("SELECT * FROM `subsampletype` WHERE `sampleTypeID` IN(SELECT `sampleTypeID` FROM `sampletype` WHERE `typeName`='Melodies');");
                                                                 $searchobject = new SearchClass();
                                                                 $searchobject->searchqueryinput = $mysearchquery;

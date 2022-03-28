@@ -2,7 +2,7 @@
 
 class PageButtons
 {
-
+    
     public function produceRough($totalpages,$currentPage, $subSampleType,$functionName){
         $A = $currentPage;
         

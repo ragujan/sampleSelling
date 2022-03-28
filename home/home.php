@@ -28,7 +28,7 @@ require "../DB/DB.php";
                         <div class="col-12 navbardiv py-3">
                             <div class="row">
                                 <div class="col-md-4 col-2 text-lg-center text-start ">
-                                   <img class="sitelogo  " src="RagImages/RAG JNTransparent.png" alt="">
+                                   <img class="sitelogo  " src="../RagImages/RAG JNTransparent.png" alt="">
                                     
                                 </div>
 

@@ -1,67 +1,68 @@
 <?php
-require "../PDOPHP/queryFunctions.php";
-require "../PDOPHP/Pagination.php";
+
 $pagenumber;
 $allowedPages = 0;
 $stopnumber = 0;
 $outputpage = 0;
-$valueforBTN =0;
+$valueforBTN = 0;
+$exactResultsPerPage = 4;
+$DefaultSampleTypeNumber = 2;
 $A;
 
+require "../PDOPHP/queryFunctions.php";
+
 $object = new queryFunctions();
+require "../PDOPHP/Pagination.php";
 if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
-     
-    $A = $_POST["PG"];  
-    $subsampletypenumber = $_POST["SSTN"];  
-    if($subsampletypenumber =="null"){
-        
+
+    $A = $_POST["PG"];
+    $subsampletypenumber = $_POST["SSTN"];
+    if ($subsampletypenumber == "null") {
+
         $valueforBTN = "null";
-        
-        $samplePage = $object->sampleTypePages(2);
+
+        $samplePage = $object->sampleTypePages($DefaultSampleTypeNumber);
         if ($A >= $samplePage) {
             $A = $samplePage;
         } else if ($A <= 0) {
             $A = 0;
         }
-        $melody = $object->sampleType(2, $A * 2);
-        $totalCount = $object->returnTotalCount();   
-        $allowedPages = ceil($totalCount / 2);
-
-
-    }else{
+        $melody = $object->sampleType($DefaultSampleTypeNumber, $A * $exactResultsPerPage);
+        $totalCount = $object->returnTotalCount();
+        $allowedPages = ceil($totalCount / $exactResultsPerPage);
+    } else {
         $valueforBTN = $subsampletypenumber;
-       
+
         $samplePage = $object->subSampleTypePages($subsampletypenumber);
         if ($A >= $samplePage) {
             $A = $samplePage;
         } else if ($A <= 0) {
             $A = 0;
         }
-    
-        $melody = $object->subSampleType($subsampletypenumber, $A * 2);
-        $totalCount = $object->returnTotalCount();   
-        $allowedPages = ceil($totalCount / 2);
-    }
 
+        $melody = $object->subSampleType($subsampletypenumber, $A * $exactResultsPerPage);
+        $totalCount = $object->returnTotalCount();
+        $allowedPages = ceil($totalCount / $exactResultsPerPage);
+    }
 } else if (isset($_POST["PG"])) {
     $A = $_POST["PG"];
-    
+
     $valueforBTN = "null";
-    $samplePage = $object->sampleTypePages(2);
+    $samplePage = $object->sampleTypePages($DefaultSampleTypeNumber);
     if ($A >= $samplePage) {
         $A = $samplePage;
     } else if ($A <= 0) {
         $A = 0;
     }
-    $melody = $object->sampleType(2, $A * 2);
-    $totalCount = $object->returnTotalCount();   
-    $allowedPages = ceil($totalCount / 2);
+    $melody = $object->sampleType($DefaultSampleTypeNumber, $A * $exactResultsPerPage);
+    $totalCount = $object->returnTotalCount();
+    $allowedPages = ceil($totalCount / $exactResultsPerPage);
 } else {
     $A = 0;
     $valueforBTN = "null";
-    $melody = $object->sampleType(2, $A * 2);
-    $totalCount = $object->returnTotalCount();  
-    $allowedPages = ceil($totalCount / 2);
+    $melody = $object->sampleType($DefaultSampleTypeNumber, $A * $exactResultsPerPage);
+    $totalCount = $object->returnTotalCount();
+    $allowedPages = ceil($totalCount / $exactResultsPerPage);
 }
 
 if (count($melody) == 0 or $melody[0] == "Nothing") {
@@ -109,11 +110,9 @@ if (count($melody) == 0 or $melody[0] == "Nothing") {
                                             <div class="col-6 pt-2 text-center">
                                                 <span class="sampleName text-danger"><?php echo $melodyprice; ?></span>
                                             </div>
-                                            <div class="col-12  py-2 d-grid col-md-6 text-center">
-                                                <button class="cartBTN py-lg-2 py-sm-1">Cart</button>
-                                            </div>
-                                            <div class="col-12  py-2 d-grid col-md-6 text-center">
-                                                <button class="buyBTN py-lg-2 py-sm-1" onclick="viewbuy('<?php echo $melodyID ?>')">Buy</button>
+
+                                            <div class="col-12  py-2 d-grid  text-center">
+                                                <button class="buyBTN py-lg-2 py-sm-1" onclick="viewbuy('<?php echo $melodyID ?>')">View</button>
                                             </div>
                                         </div>
 
@@ -137,8 +136,8 @@ if (count($melody) == 0 or $melody[0] == "Nothing") {
                         <?php
                         require "../PDOPHP/PageButtons.php";
                         $P = new PageButtons();
-                      
-                        $pageBtn = $P->produceBtns($allowedPages, $A,$valueforBTN,"nextfunctiondrums");
+
+                        $pageBtn = $P->produceBtns($allowedPages, $A, $valueforBTN, "nextfunctionmelody");
                         ?>
                     </div>
                 </div>

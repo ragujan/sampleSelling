@@ -6,6 +6,7 @@ $allowedPages = 0;
 $stopnumber = 0;
 $outputpage = 0;
 $valueforBTN = 0;
+$exactResultsPerPage =4;
 $A;
 
 $object = new queryFunctions();
@@ -20,9 +21,9 @@ $object = new queryFunctions();
         $A = 0;
     }
     
-    $melody = $object->searchByText($searchText, $A * 2);
+    $melody = $object->searchByText($searchText, $A * $exactResultsPerPage);
     $totalCount = $object->returnTotalCount();
-    $allowedPages = ceil($totalCount / 2);
+    $allowedPages = ceil($totalCount / $exactResultsPerPage);
 }else if (isset($_POST["searchText"])) {
     $A = 0;
    
@@ -37,14 +38,14 @@ $object = new queryFunctions();
     }
     $melody = $object->searchByText($searchText, 0);
     $totalCount = $object->returnTotalCount();
-    $allowedPages = ceil($totalCount / 2);
+    $allowedPages = ceil($totalCount / $exactResultsPerPage);
 } else {
 
     $A = 0;
     $valueforBTN = "null";
-    $melody = $object->searchByText($searchText, $A * 2);
+    $melody = $object->searchByText($searchText, $A * $exactResultsPerPage);
     $totalCount = $object->returnTotalCount();
-    $allowedPages = ceil($totalCount / 2);
+    $allowedPages = ceil($totalCount / $exactResultsPerPage);
 }
 
 if (count($melody) == 0 or $melody[0] == "Nothing") {
@@ -92,11 +93,9 @@ if (count($melody) == 0 or $melody[0] == "Nothing") {
                                             <div class="col-6 pt-2 text-center">
                                                 <span class="sampleName text-danger"><?php echo $melodyprice; ?></span>
                                             </div>
-                                            <div class="col-12  py-2 d-grid col-md-6 text-center">
-                                                <button class="cartBTN py-lg-2 py-sm-1">Cart</button>
-                                            </div>
-                                            <div class="col-12  py-2 d-grid col-md-6 text-center">
-                                                <button class="buyBTN py-lg-2 py-sm-1" onclick="viewbuy('<?php echo $melodyID ?>')">Buy</button>
+                                         
+                                            <div class="col-12  py-2 d-grid  text-center">
+                                                <button class="buyBTN py-lg-2 py-sm-1" onclick="viewbuy('<?php echo $melodyID ?>')">View</button>
                                             </div>
                                         </div>
 
@@ -136,3 +135,4 @@ if (count($melody) == 0 or $melody[0] == "Nothing") {
 }
 
 ?>
+

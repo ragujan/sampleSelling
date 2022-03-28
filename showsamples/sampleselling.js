@@ -6,6 +6,13 @@ let uploadFilesOnly = document.getElementById('uploadFileOnly')
 let uploadAudioOnly = document.getElementById('uploadAudioOnly')
 let uploadImageOnly = document.getElementById('uploadImageOnly')
 
+function sanitizerInput(data){
+  const div = document.createElement('div');
+  div.textContent = data;
+  return div.innerHTML;
+}
+
+
 window.addEventListener('load', async () => {
   //  let val = 0
 
@@ -16,7 +23,10 @@ window.addEventListener('load', async () => {
     .then((response) => response.text())
     .then((text) => {
       let samplebox2 = document.getElementById('showmelodysamples')
-      samplebox2.innerHTML = text
+      let sanitizeData  = sanitizerInput(text);
+      console.log(sanitizeData);
+      samplebox2.innerHTML= text;
+      
     })
 
   let url2 = '../showsamples/sampletypeDrums.php'
@@ -26,6 +36,8 @@ window.addEventListener('load', async () => {
       let samplebox2 = document.getElementById('showdrumsamples')
       samplebox2.innerHTML = text
     })
+
+   console.log(form); 
 })
 async function loadwin() {
   let val = 1
@@ -63,7 +75,7 @@ function showsubsamples() {
     .then((response) => response.text())
     .then((text) => {
       let samplebox = document.getElementById('showmelodysamples')
-      samplebox.innerHTML = text
+      samplebox.innerHTML = text;
     })
 }
 
@@ -177,7 +189,7 @@ function pausemusic(x) {
 }
 
 function viewbuy(x) {
-  window.location = 'viewsingleproduct.php?X=' + x
+  window.location = '../viewsingleproduct/viewsingleproduct.php?X=' + x
 }
 let searchButton = document.getElementById('searchButton')
 
@@ -190,8 +202,10 @@ searchButton.addEventListener('click', () => {
     .then((response) => response.text())
     .then((text) => {
       let mainsampleBox = document.getElementById('mainsampleDiv')
+      mainsampleBox.innerHTML =" ";
       mainsampleBox.classList.add('d-none')
       let samplebox = document.getElementById('showmelodySearchsamples')
       samplebox.innerHTML = text
     })
 })
+

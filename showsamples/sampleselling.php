@@ -2,6 +2,7 @@
 
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +28,7 @@
                     <div class="row">
                         <div class="col-12 py-3">
                             <div class="row">
-                                <div class="col-4 text-center py-2">
+                                <div class="col-4 text-start py-2">
                                     <a href="#"> <img class="sitelogo" src="../RagImages/RAG JN.png" alt="">
                                     </a>
                                 </div>

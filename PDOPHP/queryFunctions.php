@@ -4,12 +4,10 @@ require "connectDB.php";
 class queryFunctions extends DBh
 {
 
-    public $testFeatchArray;
-    private $numrows;
-    public $allowedpages;
-    public $totalcount;
-    public $fetcharray;
 
+    private $totalcount;
+    private $fetcharray;
+    private $exactResultsPerPage =4;
     private $subSamplesQuery = "SELECT * FROM samples 
     INNER JOIN subsampletype
     ON subsampletype.subsampleID =samples.SubsampleID
@@ -30,11 +28,7 @@ class queryFunctions extends DBh
     INNER JOIN sampleimages
     ON sampleimages.sampleID=samples.sampleID";
 
-    private $sampleSearchTextQuery = "SELECT * FROM samples 
-    INNER JOIN subsampletype
-    ON subsampletype.subsampleID = samples.SubsampleID
-    INNER JOIN sampletype
-    ON sampletype.sampleTypeID = subsampletype.sampleTyp";
+
 
     public function subSampleType($id, $PG)
     {
@@ -47,15 +41,15 @@ class queryFunctions extends DBh
             $this->fetcharray = array("Nothing");
             return $this->fetcharray;
         } else {
-            $totalPages = ceil($this->totalcount / 2);
+            $totalPages = ceil($this->totalcount / $this -> exactResultsPerPage);
 
-            if ($PG >= ($totalPages - 1) * 2) {
-                $PG = ($totalPages - 1) * 2;
+            if ($PG >= ($totalPages - 1) * $this -> exactResultsPerPage) {
+                $PG = ($totalPages - 1) * $this -> exactResultsPerPage;
             } else if ($PG <= 0) {
                 $PG = 0;
             }
 
-            $sql = $this->subSamplesQuery . " " . "WHERE subsampletype.subsampleID = ? LIMIT 2 OFFSET $PG  ";
+            $sql = $this->subSamplesQuery . " " . "WHERE subsampletype.subsampleID = ? LIMIT" ." ". $this->exactResultsPerPage. " " . "OFFSET $PG  ";
 
             $statement2 = $this->connect()->prepare($sql);
             $statement2->execute([$id]);
@@ -76,7 +70,7 @@ class queryFunctions extends DBh
             return 0;
         } else {
             // echo count($statement1->fetchAll());
-            $totalPages = (ceil($this->totalcount / 2) - 1);
+            $totalPages = (ceil($this->totalcount / $this -> exactResultsPerPage) - 1);
             return $totalPages;
         }
     }
@@ -93,16 +87,16 @@ class queryFunctions extends DBh
             return $this->fetcharray;
         } else {
             // echo count($statement1->fetchAll());
-            $totalPages = ceil($this->totalcount / 2);
+            $totalPages = ceil($this->totalcount / $this ->exactResultsPerPage);
 
-            if ($PG >= ($totalPages - 1) * 2) {
-                $PG = ($totalPages - 1) * 2;
+            if ($PG >= ($totalPages - 1) * $this ->exactResultsPerPage) {
+                $PG = ($totalPages - 1) * $this ->exactResultsPerPage;
             } else if ($PG <= 0) {
                 $PG = 0;
             }
 
 
-            $sql = $this->sampleTypeQuery . " " . "WHERE sampletype.sampleTypeID = ? LIMIT 2 OFFSET $PG  ";
+            $sql = $this->sampleTypeQuery . " " . "WHERE sampletype.sampleTypeID = ? LIMIT" ." ". $this->exactResultsPerPage. " " . "OFFSET $PG  ";
 
             $statement2 = $this->connect()->prepare($sql);
             $statement2->execute([$id]);
@@ -123,7 +117,7 @@ class queryFunctions extends DBh
             return 0;
         } else {
             // echo count($statement1->fetchAll());
-            $totalPages = (ceil($this->totalcount / 2) - 1);
+            $totalPages = (ceil($this->totalcount / $this ->exactResultsPerPage) - 1);
             return $totalPages;
         }
     }
@@ -141,15 +135,15 @@ class queryFunctions extends DBh
             $this->fetcharray = array("Nothing");
             return $this->fetcharray;
         } else {
-            $totalPages = ceil($this->totalcount / 2);
+            $totalPages = ceil($this->totalcount / $this -> exactResultsPerPage);
 
-            if ($PG >= ($totalPages - 1) * 2) {
-                $PG = ($totalPages - 1) * 2;
+            if ($PG >= ($totalPages - 1) * $this -> exactResultsPerPage) {
+                $PG = ($totalPages - 1) * $this -> exactResultsPerPage;
             } else if ($PG <= 0) {
                 $PG = 0;
             }
 
-            $sql = $this->sampleTypeQuery . " " . "WHERE samples.Sample_Name LIKE ? OR samples.SampleDescription LIKE ? LIMIT 2 OFFSET $PG;";
+            $sql = $this->sampleTypeQuery . " " . "WHERE samples.Sample_Name LIKE ? OR samples.SampleDescription LIKE ? LIMIT" ." ". $this->exactResultsPerPage. " " . "OFFSET $PG  ";
             $propertext = '%' . $searchtext . '%';
 
             $statement2 = $this->connect()->prepare($sql);
@@ -172,7 +166,7 @@ class queryFunctions extends DBh
             $this->fetcharray = array("Nothing");
             return 0;
         } else {
-            $totalPages = (ceil($this->totalcount / 2) - 1);
+            $totalPages = (ceil($this->totalcount / $this -> exactResultsPerPage) - 1);
 
             return $totalPages;
         }
@@ -180,6 +174,64 @@ class queryFunctions extends DBh
     public function returnTotalCount()
     {
         return $this->totalcount;
+    }
+    public function validateCardproductID($cardID){
+        $cal =" SELECT * FROM samples WHERE samples.sampleID = ?";
+        $propertext = $cardID;
+        $statement1 = $this ->connect()->prepare($cal);
+        $statement1 -> execute(([$propertext]));
+        $this -> totalcount = count($statement1 ->fetchAll());
+        if($this ->totalcount == 0){
+            $this -> fetcharray = array("Nothing");
+            return 0;
+        }else{
+            return $this->totalcount;
+        }
+    }
+    public function checkCartrows($id){
+        $cal = "SELECT * FROM samples WHERE samples.sampleID =?";
+        $properID  = $id;
+        $statement1 = $this ->connect()->prepare($cal);
+        $statement1 ->execute([$id]);
+        $this ->totalcount = count($statement1 ->fetchAll());
+        if($this -> totalcount == 0){
+            $this ->fetcharray = array("Nothing");
+            return 0;
+        }else{
+            return $this -> totalcount;
+        }
+        
+    }
+    public function showCartRows($id){
+        $cal = "SELECT samples.sampleID FROM samples WHERE samples.sampleID =?";
+        $properID  = $id;
+        $statement1 = $this ->connect()->prepare($cal);
+        $statement1 ->execute([$properID]);
+        $this ->totalcount = count($statement1 ->fetchAll());
+        if($this -> totalcount == 0){
+            
+            $this->fetcharray = array("Nothing");
+            return $this->fetcharray;
+        }else{
+        
+            $sql = "SELECT 
+            samples.sampleID,
+            samples.SamplePrice,
+            samples.Sample_Name,
+            samples.SampleDescription,
+            sampleimages.source_URL
+            FROM samples INNER JOIN
+            sampleimages
+            ON
+            sampleimages.sampleID = samples.sampleID
+            WHERE samples.sampleID =?" ;
+
+            $statement2 = $this->connect()->prepare($sql);
+            $statement2->execute([$id]);
+
+            return $statement2->fetchAll();
+
+        } 
     }
 }
 
