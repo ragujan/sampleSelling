@@ -4,7 +4,7 @@ if ($_POST["id"] && !empty($_POST["id"]) ) {
     require "../PDOPHP/queryFunctions.php";
     $ID = $_POST["id"];
    
-    if (intval($ID) ) {
+    if (intval($ID) && $ID>0 ) {
         $object = new queryFunctions();
         $row = $object->validateCardproductID($ID);
         if ($row == 1) {

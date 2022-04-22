@@ -7,7 +7,7 @@ class DB
     public static function common()
     {
         if (!isset(DB::$dbms)) {
-            DB::$dbms = new mysqli("localhost", "root", "ragJN100Mania", "s2", "3306");
+            DB::$dbms = new mysqli("localhost", "root", "ragJN100Mania", "sampleselling", "3306");
         }
     }
 

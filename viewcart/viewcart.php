@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../bootstrap.css">
     <link rel="stylesheet" href="../style/sampleselling.css">
+    <link rel="stylesheet" href="../style/navbar.css">
     <link rel="stylesheet" href="../style/viewsingleproduct.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 
     <title>Document</title>
 </head>
@@ -18,7 +18,7 @@
     <div class="container-fluid">
         <div class="col-12">
             <div class="row">
-                <div class="col-12  navbardiv2 py-3">
+                <!-- <div class="col-12  navbardiv2 py-3">
                     <div class="row">
                         <div class="col-md-4 col-2  text-lg-start text-start ">
                             <img class="sitelogo  " src="../RagImages/RAG JNTransparent.png" alt="">
@@ -54,13 +54,32 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-12 showCartItemsDiv">
+                </div> -->
+              <?php
+             require "../siteHeader/header.php";
+              ?>
+              <div id="cartItems d-none"></div>
+                <div class="col-lg-9 col-12  showCartItemsDiv">
                     <div id="cartRowHolder" class="row">
 
                     </div>
                 </div>
+                <div class="col-lg-3 col-12 showTotalAmountDiv" >
+                    <div class="row">
+                        <div class=" py-3 px-4 col-12 offset-0 d-flex flex-row justify-content-lg-between justify-content-center">
+                            <span class="text-white">Sub Total</span>
+                            <span class="text-white" >$ <span id="subTotalValue"></span></span>
+                        </div>
+                        <div class=" pt-1 pb-4 px-4 col-12 offset-0 d-flex flex-row justify-content-center">
+                            <button class="checkOutButton w-75 py-2" > Check Out</button>
+                        </div>
+                        <div class=" py-1 px-1 col-12 offset-0 d-flex flex-row justify-content-center">
+                            <span class="text-white checkOutDescription">Shipping, taxes, and discount codes calculated at checkout.</span>
+                            
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

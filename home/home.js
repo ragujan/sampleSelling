@@ -44,3 +44,21 @@ window.addEventListener('scroll', () => {
     // console.log("the calculation " + windowvalue / 50)
 
 })
+
+function upDateCartBagGui(arrayName){
+    let cartRowCount = Object.keys(arrayName).length;
+    let cartBag = document.getElementById("cartItems");
+    cartBag.innerHTML = cartRowCount;
+  }
+  
+  upDateCartBagGui(getCart());
+  function getCart() {
+    let getItemCart = globalThis.localStorage.getItem("cart");
+    let check = true;
+    if(getItemCart == undefined || getItemCart == null || getItemCart == "[]"){
+      console.log("yo");
+      console.log(getItemCart);
+      globalThis.localStorage.clear();
+    }
+    return JSON.parse(globalThis.localStorage.getItem("cart") ?? "{}");
+  }

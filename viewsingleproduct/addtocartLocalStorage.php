@@ -1,23 +1,31 @@
 <?php
 
-$ID = $_POST["ID"];
-echo $_POST;
-$separtedvalues =explode(" ",$ID);
-$first_Value_String = $separtedvalues[0];
-$second_Value_String = $separtedvalues[1];
-$first_Value_Int  = intval($first_Value_String);
-$second_Value_Int = intval($second_Value_String);
-if(!$first_Value_String =="0" || !$second_Value_String == "0"){
-    if(!intval($first_Value_Int) ==0 && !intval($second_Value_Int) ==0){
-        echo $first_Value_Int;
-        echo gettype($first_Value_Int);
-        echo $second_Value_Int;
-        echo gettype($second_Value_Int);
-    }else{
-         
+if ($_POST["id"] && !empty($_POST["id"]) && $_POST["id"]>0 &&   $_POST["qty"] && $_POST["qty"]>0  && !empty($_POST["qty"]) ) {
+    require "../PDOPHP/queryFunctions.php";
+    $ID = $_POST["id"];
+    $QTY = $_POST["qty"];
+    if (intval($ID) && intval($QTY) && $ID>0 && $QTY>0 ) {
+        $object = new queryFunctions();
+        $row = $object->validateCardproductID($ID);
+        if ($row == 1) {
+            $validatedArray = array("id"=>$ID,"qty"=> $QTY);
+           echo  json_encode($validatedArray);
+        }else{
+            $errorArray = array("id"=>"Nope");
+            echo  json_encode($errorArray);
+        }
+    } else {
+        $errorArray = array("id"=>"Nope");
+        echo  json_encode($errorArray);
     }
-}else{
-      
-}
 
+?>
+    
+      
+    
+<?php
+}else{
+    $errorArray = array("ID"=>"Nope");
+    echo  json_encode($errorArray);
+}
 ?>

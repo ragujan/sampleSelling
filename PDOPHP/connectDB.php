@@ -12,7 +12,7 @@ class DBh
     {   
 
         $this->servername = "localhost";
-        $this->dbname = "s2";
+        $this->dbname = "sampleselling";
         $this->password = "ragJN100Mania";
         $this->port = 3306;
         $this->username = "root";

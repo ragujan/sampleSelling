@@ -1,9 +1,25 @@
-let cartRows = getCart();
-let cartRowCount = Object.keys(cartRows).length;
-let cartBag = document.getElementById("cartItems");
-cartBag.innerHTML = cartRowCount;
+const cartQtySelect = document.getElementById('selectQTY');
+cartQtySelect.addEventListener('change',()=>{
+  if(cartQtySelect.value <=1){
+    cartQtySelect.value =1;
+  }
+})
 
+function upDateCartBagGui(arrayName){
+  let cartRowCount = Object.keys(arrayName).length;
+  let cartBag = document.getElementById("cartItems");
+  cartBag.innerHTML = cartRowCount;
+}
+
+upDateCartBagGui(getCart());
 function getCart() {
+  let getItemCart = globalThis.localStorage.getItem("cart");
+  let check = true;
+  if(getItemCart == undefined || getItemCart == null || getItemCart == "[]"){
+    console.log("yo");
+    console.log(getItemCart);
+    globalThis.localStorage.clear();
+  }
   return JSON.parse(globalThis.localStorage.getItem("cart") ?? "{}");
 }
 
@@ -22,7 +38,7 @@ function addToCart(id) {
     let combined = productIDString + " " + cartQTYString;
     let form = new FormData();
     form.append("ID", combined);
-    let url = "../viewsingleproduct/addtocartLocalStorage.php";
+    let url = "../viewsingleproduct/addtoCartLocalStorage.php";
     fetch(url, { body: form, method: "POST" })
       .then((response) => response.text())
       .then((text) => {
@@ -53,7 +69,7 @@ function addToCart2(id) {
     const f = new FormData();
     f.append("id", id);
     f.append("qty", cartQTY);
-    let url = "../viewsingleproduct/addtoCartLocalStorage2.php";
+    let url = "../viewsingleproduct/addtoCartLocalStorage.php";
     let api = fetch(url, { body: f, method: "POST" })
       .then((response) => response.json())
       .then((data) => {
@@ -64,10 +80,7 @@ function addToCart2(id) {
         let cart = getCart();
         console.log(typeof cart);
         console.log(cart);
-        //cart.push ({ id,intQTY });
-        // cart[cartIDAndQtyValidated["ID"]] = parseInt(
-        //   cartIDAndQtyValidated["QTY"]
-        // );
+
         saveCart(cart);
         let cartRows = getCart();
         let cartRowCount = Object.keys(cartRows).length;
@@ -88,21 +101,22 @@ let newAddtoCart = (id) => {
   const f = new FormData();
   f.append("id", id);
   f.append("qty", qty);
-  let url = "../viewsingleproduct/addtoCartLocalStorage2.php";
+  let url = "../viewsingleproduct/addtoCartLocalStorage.php";
   let api = fetch(url, { body: f, method: "POST" })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (data["ID"] !== "Nope") {
         intQTY = parseInt(data["qty"]);
         intID = parseInt(data["id"]);
 
         if (existingCart.length === undefined) {
+          console.log("new one");
           let newArray = data;
           let objectArray = [];
           objectArray.push(newArray);
           globalThis.localStorage.setItem("cart", JSON.stringify(objectArray));
         } else {
+          console.log("new one");
           let arraySearch = existingCart.find((a, index) => {
             if (a.id == intID) {
               existingCart[index] = data;
@@ -118,11 +132,13 @@ let newAddtoCart = (id) => {
                 "cart",
                 JSON.stringify(localArray)
               );
+              upDateCartBagGui(localArray);
             } else {
               globalThis.localStorage.setItem(
                 "cart",
                 JSON.stringify(existingCart)
               );
+              upDateCartBagGui(existingCart);
             }
           });
         }
@@ -172,9 +188,9 @@ function goToviewCart(id) {
           objectArray.push(newArray);
           globalThis.localStorage.setItem("cart", JSON.stringify(objectArray));
         } else {
+
           let arraySearch = existingCart.find((a, index) => {
             if (a.id == intID) {
-              //existingCart[index] = data;
               console.log(`id is in the ${index}th index  of array`);
             } else {
               localArray.push(existingCart[index]);
@@ -195,8 +211,9 @@ function goToviewCart(id) {
             }
           });
 
-          window.location = "../viewcart/viewcart.php?X=" + id;
+          
         }
+        window.location = "../viewcart/viewcart.php?X=" + id;
       } else {
         console.log("Nope Nope");
       }
