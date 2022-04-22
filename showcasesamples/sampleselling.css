@@ -470,3 +470,7 @@ body {
     padding: 2%;
     border-radius: 1%;
 }
+.sampleDetailsBox h6{
+    font-size: 1.5rem;
+}
+

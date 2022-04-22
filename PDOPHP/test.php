@@ -17,6 +17,7 @@
 
 <?php
 require "queryFunctions.php";
+require "./PageButtons.php";
 
 $object = new queryFunctions();
 
@@ -24,7 +25,7 @@ $melody = $object->sampleType(1, 12);
 
 if (count($melody) == 0) {
     $melodydetails = $melody;
-    print_r($melodydetails);
+    
 } else {
     for ($i = 0; $i < count($melody); $i++) {
         $melodydetails = $melody;
@@ -36,7 +37,7 @@ if (count($melody) == 0) {
     }
 }
 
-class PageButtons
+class PageButtons22
 {
     public function produceBtns($totalpages, $currentPage, $buttonPerPages)
     {
@@ -93,8 +94,7 @@ class PageButtons
 
 
 $P = new PageButtons();
-$pageBtn = $P->produceBtns(6, 2, 3);
+$pageBtn = $P->produceBtns(6, 0, 3,"ragJn","ragJN");
 
 
-$value ="33rag";
-echo is_numeric($value);
+

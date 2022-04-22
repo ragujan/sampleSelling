@@ -52,8 +52,14 @@ for ($i = 0; $i < count($melody); $i++) {
     echo "</br>";
     echo "</br>";
 }
-
-$search = $object ->searchByText("a",0);
+echo "</br>";
+echo "</br>";
+echo "</br>";
+echo "</br>";
+echo "</br>";
+echo "EEEEEE";
+$searhPages= $object->searchByTextPages("a");
+$search = $object ->searchByText("333",1);
 print_r($search);
 // $keywords = preg_split('/[\s]+/', "ragJNJNN RTTR Bronx DeBx");
 

@@ -1,67 +1,75 @@
 <?php
 require "../PDOPHP/queryFunctions.php";
 require "../PDOPHP/Pagination.php";
+require "../PDOPHP/Validations.php";
+$pageName = "sampleTypeMelody";
 $pagenumber;
 $allowedPages = 0;
 $stopnumber = 0;
 $outputpage = 0;
-$valueforBTN =0;
+$valueforBTN = 0;
+$exactResultsPerPage = 8;
+$DefaultSampleTypeNumber = 1;
 $A;
 
 $object = new queryFunctions();
+
+
+
+
 if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
-     
-    $A = $_POST["PG"];  
-    $subsampletypenumber = $_POST["SSTN"];  
-    if($subsampletypenumber =="null"){
-        
-        $valueforBTN = "null";
-        
-        $samplePage = $object->sampleTypePages(1);
+
+    
+    $A = $_POST["PG"];
+    $subsampletypenumber = $_POST["SSTN"];
+    if ($subsampletypenumber == 0) {
+
+        $valueforBTN = 0;
+
+        $samplePage = $object->sampleTypePages($DefaultSampleTypeNumber);
         if ($A >= $samplePage) {
             $A = $samplePage;
         } else if ($A <= 0) {
             $A = 0;
         }
-        $melody = $object->sampleType(1, $A * 2);
-        $totalCount = $object->returnTotalCount();   
-        $allowedPages = ceil($totalCount / 2);
-
-
-    }else{
+        $melody = $object->sampleType($DefaultSampleTypeNumber, $A * $exactResultsPerPage);
+        $totalCount = $object->returnTotalCount();
+        $allowedPages = ceil($totalCount / $exactResultsPerPage);
+    } else {
         $valueforBTN = $subsampletypenumber;
-       
+
         $samplePage = $object->subSampleTypePages($subsampletypenumber);
         if ($A >= $samplePage) {
             $A = $samplePage;
         } else if ($A <= 0) {
             $A = 0;
         }
-    
-        $melody = $object->subSampleType($subsampletypenumber, $A * 2);
-        $totalCount = $object->returnTotalCount();   
-        $allowedPages = ceil($totalCount / 2);
-    }
 
+        $melody = $object->subSampleType($subsampletypenumber, $A * $exactResultsPerPage);
+        $totalCount = $object->returnTotalCount();
+        $allowedPages = ceil($totalCount / $exactResultsPerPage);
+    }
 } else if (isset($_POST["PG"])) {
-    $A = $_POST["PG"];
     
-    $valueforBTN = "null";
-    $samplePage = $object->sampleTypePages(1);
+    $A = $_POST["PG"];
+
+    $valueforBTN = 0;
+    $samplePage = $object->sampleTypePages($DefaultSampleTypeNumber);
     if ($A >= $samplePage) {
         $A = $samplePage;
     } else if ($A <= 0) {
         $A = 0;
     }
-    $melody = $object->sampleType(1, $A * 2);
-    $totalCount = $object->returnTotalCount();   
-    $allowedPages = ceil($totalCount / 2);
+    $melody = $object->sampleType($DefaultSampleTypeNumber, $A * $exactResultsPerPage);
+    $totalCount = $object->returnTotalCount();
+    $allowedPages = ceil($totalCount / $exactResultsPerPage);
 } else {
+    
     $A = 0;
-    $valueforBTN = "null";
-    $melody = $object->sampleType(1, $A * 2);
-    $totalCount = $object->returnTotalCount();  
-    $allowedPages = ceil($totalCount / 2);
+    $valueforBTN = 0;
+    $melody = $object->sampleType($DefaultSampleTypeNumber, $A * $exactResultsPerPage);
+    $totalCount = $object->returnTotalCount();
+    $allowedPages = ceil($totalCount / $exactResultsPerPage);
 }
 
 if (count($melody) == 0 or $melody[0] == "Nothing") {
@@ -73,9 +81,9 @@ if (count($melody) == 0 or $melody[0] == "Nothing") {
     </div>
 <?php
 } else {
-
+    
 ?>
-    <div id="thesamplecontainer2" class="row thesamplecontainer1  ">
+    <div  class="row   ">
         <div class="col-12">
             <div class="row">
                 <?php
@@ -84,40 +92,31 @@ if (count($melody) == 0 or $melody[0] == "Nothing") {
                     $melodyname =  $melodydetails[$i]["Sample_Name"];
                     $melodyprice =  $melodydetails[$i]["SamplePrice"];
                     $melodyID =  $melodydetails[$i]["sampleID"];
-                    $imagePath =  $melodydetails[$i]["source_URL"];;
+                    $imagePath =  $melodydetails[$i]["source_URL"];
                     $audioPath = $melodydetails[$i]["sampleAudioSrc"];
                 ?>
-                    <div class="col-lg-3 py-3  col-md-4 offset-md-0 col-sm-6 offset-sm-3 col-10 offset-1">
-                        <div class="row">
-                            <div class="col-10 beatpackdiv py-lg-3 py-md-2 py-2 offset-1">
+                    <div class="  col-lg-3 py-3  col-md-4 offset-md-0 col-sm-6 offset-sm-3 col-10 offset-1">
+                        <div class="row  ">
+
+                            <div id="beatPackDiv<?php echo $melodyID; ?>" class=" col-10 beatpackdiv  py-lg-0 py-md-0 py-0 offset-1">
                                 <div class="row">
-                                    <div class="col-12 audiopreviewdiv">
-                                        <audio id="audio<?php echo $melodyID ?>" class="audiopreview">
-                                            <source src="../<?php echo $audioPath; ?>" type="audio/ogg">
-                                            <source src="../<?php echo $audioPath; ?>" type="audio/mpeg">
+                                    <div class="col-12   audiopreviewdiv px-0 pt-0 pb-1 ">
+                                        <audio id="audio<?php echo $melodyID ?>" class="audiopreviewImage">
+                                            <source src="<?php echo $audioPath; ?>" type="audio/ogg">
+                                            <source src="<?php echo $audioPath; ?>" type="audio/mpeg">
                                             Your browser does not support the audio element.
                                         </audio>
-                                        <img src="../<?php echo  $imagePath; ?>" class="beatPACKIMAGE" alt="">
-                                        <img id="playmusic<?php echo $melodyID ?>" onclick="playmusic('<?php echo $melodyID ?>');" class="playcolrols audiopreview" src="../BrymoImages/play-button.png" alt="">
-                                        <img id="pausemusic<?php echo $melodyID ?>" onclick="pausemusic('<?php echo $melodyID ?>');" class="playcolrols audiopreview d-none" src="../BrymoImages/pause.png" alt="">
+                                        <img src="../samplesImages/Iceberg-White_1024x1024.jpg" class="beatPACKIMAGE " alt="">
+                                        <img  id="playmusic<?php echo $melodyID ?>" onclick="playmusic('<?php echo $melodyID ?>');" class="playcolrols audiopreview" src="../BrymoImages/play-button.png" alt="">
+                                        <img  id="pausemusic<?php echo $melodyID ?>" onclick="pausemusic('<?php echo $melodyID ?>');" class="playcolrols audiopreview d-none" src="../BrymoImages/pause.png" alt="">
                                     </div>
-                                    <div class="col-12 pt-2">
-                                        <div class="row">
-                                            <div class="col-6 pt-2 text-center">
-                                                <span class="sampleName"><?php echo $melodyname; ?></span>
-                                            </div>
-                                            <div class="col-6 pt-2 text-center">
-                                                <span class="sampleName text-danger"><?php echo $melodyprice; ?></span>
-                                            </div>
-                                            <div class="col-12  py-2 d-grid col-md-6 text-center">
-                                                <button class="cartBTN py-lg-2 py-sm-1">Cart</button>
-                                            </div>
-                                            <div class="col-12  py-2 d-grid col-md-6 text-center">
-                                                <button class="buyBTN py-lg-2 py-sm-1" onclick="viewbuy('<?php echo $melodyID ?>')">Buy</button>
-                                            </div>
-                                        </div>
 
+                                    <div class="col-12 d-flex  flex-column pb-3 px-4 ">                               
+                                            <h5 style=""  class="text-white mt-3  sampleDetailsBox-Name "><?php echo $melodyname ?></h5>
+                                            <h5 class="text-white mt-1  sampleDetailsBox">$ 47.44</h5>
+                                            <button class="viewBTN mt-1 sampleDetailsBox  py-lg-2 py-sm-1" onclick="viewbuy('<?php echo $melodyID ?>')">View</button>                                   
                                     </div>
+
                                 </div>
 
                             </div>
@@ -137,8 +136,8 @@ if (count($melody) == 0 or $melody[0] == "Nothing") {
                         <?php
                         require "../PDOPHP/PageButtons.php";
                         $P = new PageButtons();
-                      
-                        $pageBtn = $P->produceBtns($allowedPages, $A,$valueforBTN,"nextfunctionmelody");
+
+                        $pageBtn = $P->produceBtns($allowedPages, $A, $valueforBTN, "commonNextFunction", $pageName);
                         ?>
                     </div>
                 </div>

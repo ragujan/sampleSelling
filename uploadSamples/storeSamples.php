@@ -13,7 +13,7 @@ class FileHandler
         $filesize = $file["size"];
         $filetemp = $file["tmp_name"];
 
-        $this->unique_name_generated = "{$foldername}/" . uniqid() . $filename;
+        $this->unique_name_generated = "../{$foldername}/" . uniqid() . $filename;
         $filefullname = explode(".", $filename);
         $format = strtolower(end($filefullname));
 
@@ -41,7 +41,7 @@ class FileHandler
     }
 }
 
-require "DB/DB.php";
+
 $charLength = 25;
 if (
     isset($_POST["SampleName"]) &&  !empty($_POST["SampleName"])
@@ -62,7 +62,7 @@ if (
         if (
             $_FILES["SampleFile"]["type"] == "application/x-zip-compressed" && $_FILES["SampleAudio"]["type"] == "audio/mpeg" && $_FILES["SampleImage"]["type"] == "image/jpeg"
         ) {
-
+            require "../DB/DB.php";
             $typesearch = DB::forsearch("SELECT * FROM `sampletype`;");
             $availabletypes;
 

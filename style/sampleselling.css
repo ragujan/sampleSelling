@@ -30,7 +30,10 @@ body {
     z-index: 5;
     background-color: black;
 }
+.navbardiv2 {
 
+    background-color: black;
+}
 .maindiv {
     position: relative;
 }
@@ -469,4 +472,25 @@ body {
     font-weight: bolder;
     padding: 2%;
     border-radius: 1%;
+}
+.ragNavbarDiv{
+    display: flex;
+    flex-direction: row;
+}
+.ragNavBarDivLogo img{
+    width: 200px;
+    max-width: 100%;
+}
+.ragNavbar{
+    border-bottom: 1px solid white;
+}
+.ragNavBarNavMainLinksDiv{
+    display: flex;
+    flex-direction: row;
+   
+}
+.ragNavBarNavMainLinksDiv div{
+    margin-left: 5%;
+    margin-right: 5%;
+   
 }

@@ -2,31 +2,23 @@
 
 class PageButtons
 {
+    
 
-    public function produceRough($totalpages,$currentPage, $subSampleType,$functionName){
-        $A = $currentPage;
-        
-        ?>
-        <div class="col  text-center  d-grid ">
-            <button id="prev" class=" nextButton" onclick="<?php echo $functionName; ?>('<?php echo $currentPage+1  ?>','<?php echo $subSampleType  ?>');"><?php echo $A + 1; ?></button>
-        </div>
-
-    <?php
-    }
-    public function produceBtns($totalpages, $currentPage, $subSampleType,$functionName)
+    public function produceBtns($totalpages, $currentPage, $subSampleType,$functionName,$pageName)
     {
         $A = $currentPage;
+    
       
 ?>   
         <div class="col  text-center  d-grid ">
-            <button id="prev" class=" nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A - 1); ?>','<?php echo $subSampleType ?>');"><?php echo "Prev"; ?></button>
+            <button id="prev" class="bg-dark nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A - 1); ?>','<?php echo $subSampleType ?>','<?php echo $pageName; ?>');"><?php echo "Prev"; ?></button>
         </div>
         <?php
         if (($A - 2) < 0) {
         } else {
         ?>
             <div class="col  text-center  d-grid ">
-                <button id="prev" class=" nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A - 2); ?>','<?php echo $subSampleType ?>');"><?php echo $A - 1; ?></button>
+                <button id="prev" class="bg-dark nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A - 2); ?>','<?php echo $subSampleType ?>','<?php echo $pageName; ?>');"><?php echo $A - 1; ?></button>
             </div>
 
         <?php
@@ -36,14 +28,14 @@ class PageButtons
         ?>
 
             <div class="col  text-center  d-grid ">
-                <button id="prev" class=" nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A - 1); ?>','<?php echo $subSampleType ?>');"><?php echo $A; ?></button>
+                <button id="prev" class="bg-dark nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A - 1); ?>','<?php echo $subSampleType ?>','<?php echo $pageName; ?>');"><?php echo $A; ?> </button>
             </div>
         <?php
         }
         ?>
 
         <div class="col  text-center  d-grid ">
-            <button id="prev" class="bg-danger nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A); ?>','<?php echo $subSampleType ?>');"><?php echo $A + 1; ?></button>
+            <button id="prev" style="background-color:black;color:white;border: white 1px solid;" class=" nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A); ?>','<?php echo $subSampleType ?>','<?php echo $pageName; ?>');"><?php echo $A + 1; ?></button>
         </div>
 
         <?php
@@ -51,7 +43,7 @@ class PageButtons
         } else {
         ?>
             <div class="col  text-center  d-grid ">
-                <button id="prev" class=" nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A + 1); ?>','<?php echo $subSampleType ?>');"><?php echo $A + 2; ?></button>
+                <button id="prev" class="bg-dark nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A + 1); ?>','<?php echo $subSampleType ?>','<?php echo $pageName; ?>');"><?php echo $A + 2; ?></button>
             </div>
 
         <?php
@@ -61,20 +53,20 @@ class PageButtons
         ?>
 
             <div class="col  text-center  d-grid ">
-                <button id="prev" class=" nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A + 2); ?>','<?php echo $subSampleType ?>');"><?php echo $A + 3; ?></button>
+                <button id="prev" class="bg-dark nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A + 2); ?>','<?php echo $subSampleType ?>','<?php echo $pageName; ?>');"><?php echo $A + 3; ?></button>
             </div>
         <?php
         }
 
         ?>
         <div class="col  text-center  d-grid">
-            <button id="next" class=" nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A + 1); ?>','<?php echo $subSampleType ?>');"><?php echo "Next"; ?></button>
+            <button id="next" class="bg-dark nextButton" onclick="<?php echo $functionName; ?>('<?php echo ($A + 1); ?>','<?php echo $subSampleType ?>','<?php echo $pageName; ?>');"><?php echo "Next"; ?></button>
         </div>
 
 <?php
 
     }
-    public function produceSearchBtns($totalpages, $currentPage, $subSampleType)
+    public function produceSearchBtns($totalpages, $currentPage, $subSampleType,$pageName)
     {
         $A = $currentPage;
 ?>
